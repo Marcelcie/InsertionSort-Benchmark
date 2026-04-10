@@ -1,45 +1,43 @@
 # Benchmark Algorytmów Sortowania: Warianty Insertion Sort
 
 ## 📝 Opis projektu
-Projekt ma na celu empiryczną analizę wydajności różnych wariantów algorytmu **Sortowania przez wstawianie (Insertion Sort)**. Program został zaimplementowany w języku C++ z podziałem na moduły, co zapewnia wysoką czytelność i łatwość rozbudowy.
+Projekt ma na celu empiryczną analizę wydajności różnych wariantów algorytmu **Sortowania przez wstawianie (Insertion Sort)**. Program został zaimplementowany w języku C++ w formie funkcjonalnego narzędzia do pomiarów wydajnościowych.
 
-Głównym celem było sprawdzenie, jak optymalizacje (np. wyszukiwanie binarne) oraz charakterystyka danych wejściowych (losowe, posortowane, odwrotne) wpływają na czas wykonania, liczbę porównań oraz liczbę przesunięć elementów.
+Głównym celem było sprawdzenie, jak optymalizacje oraz charakterystyka danych wejściowych (losowe, posortowane, odwrotnie posortowane) wpływają na:
+* **Czas wykonania** (w mikrosekundach),
+* **Liczbę porównań** kluczy,
+* **Liczbę przesunięć** elementów w tablicy.
+
+## 💻 Specyfikacja sprzętowa
+Pomiary zostały przeprowadzone na następującej konfiguracji:
+* **Procesor:** AMD Ryzen 7 5700X3D (8 rdzeni, 16 wątków)
+* **Karta graficzna:** NVIDIA GeForce RTX 3060
+* **Pamięć RAM:** 32GB DDR4 3200mhz
 
 ## 🚀 Implementowane algorytmy
-1. **Classic Insertion Sort**: Standardowa implementacja algorytmu ze wstawianiem liniowym.
-2. **Binary Insertion Sort**: Optymalizacja polegająca na użyciu wyszukiwania binarnego ($O(\log n)$) do znalezienia miejsca wstawienia elementu.
-3. **Linear Mirror Sort**: Wariant algorytmu przeszukujący tablicę od końca (lustrzane odbicie).
+1. **Classic Insertion Sort**: Standardowa implementacja z jednoczesnym szukaniem miejsca i przesuwaniem elementów wewnątrz jednej pętli.
+2. **Linear Insertion Sort**: Wariant z rozdzielonym procesem liniowego szukania miejsca wstawienia oraz przesuwania elementów.
+3. **Binary Insertion Sort**: Optymalizacja wykorzystująca wyszukiwanie binarne ($O(\log n)$) do znalezienia odpowiedniego miejsca wstawienia.
+4. **Linear Mirror Sort**: Wariant algorytmu rozpoczynający proces sortowania od końca tablicy (lustrzane odbicie).
 
-
-
-## 📊 Wyniki pomiarów (dla n = 10 000)
-Poniższe dane stanowią średnią ze 100 pomiarów przeprowadzonych w trybie **Release (x64)**.
+## 📊 Przykład wyników (dla n = 10 000)
+Dane stanowią średnią ze **100 pomiarów** przeprowadzonych w trybie **Release**.
 
 | Algorytm | Typ danych | Czas [μs] | Porównania | Przesunięcia |
 | :--- | :--- | :--- | :--- | :--- |
-| **Classic** | Losowe | 63 800 | 25 016 522 | 25 006 531 |
-| **Binary** | Losowe | 79 124 | **119 004** | 25 006 531 |
-| **Classic** | Posortowane | **39** | 9 999 | 0 |
-| **Binary** | Posortowane | 525 | 113 631 | 0 |
+| **Classic** | Losowe | ~63 800 | ~25 000 000 | ~25 000 000 |
+| **Binary** | Losowe | ~79 000 | **~119 000** | ~25 000 000 |
+| **Classic** | Posortowane | **~40** | 9 999 | 0 |
 
-
-
-### Kluczowe wnioski:
-* **Wyszukiwanie Binarne**: Drastycznie redukuje liczbę porównań (z ~25 mln do ~119 tys.), jednak całkowity czas wykonania jest nieco wyższy przez narzut obliczeniowy wyszukiwania binarnego oraz tę samą liczbę przesunięć w pamięci.
-* **Dane Posortowane**: Algorytm wykazuje swoją najlepszą wydajność ($O(n)$), co potwierdza wynik zaledwie 39 μs.
-* **Wpływ Linkera i Optymalizacji**: Kod kompilowany w trybie **Release** działa wielokrotnie szybciej niż w trybie Debug dzięki optymalizacjom pętli przez kompilator.
+> **Wniosek:** Wyszukiwanie binarne drastycznie redukuje liczbę porównań, ale ze względu na koszt operacji na pamięci i tę samą liczbę przesunięć, czas całkowity może być zbliżony do wersji klasycznej lub nieco wyższy przez narzut logiki wyszukiwania.
 
 ## 📁 Struktura plików
-Projekt został podzielony zgodnie z dobrymi praktykami programowania strukturalnego i obiektowego:
-- `main.cpp`: Logika pomiarowa, interakcja z użytkownikiem i pętla benchmarku.
-- `sorting.cpp`: Implementacje algorytmów sortujących oraz generatorów danych.
-- `sorting.h`: Plik nagłówkowy zawierający prototypy funkcji i definicję struktury `Stats`.
-
-
+* **src/Algorytmy_projekt.cpp**: Główny i jedyny plik źródłowy zawierający implementację algorytmów, generatory danych oraz logikę benchmarku [cite: 2026-03-23].
+* **wyniki.txt**: Plik generowany automatycznie, zawierający szczegółowe dane z pomiarów w formacie CSV.
 
 ## 🛠 Kompilacja i uruchomienie
-Program można skompilować przy użyciu kompilatora GCC (g++) lub środowiska Visual Studio.
+Program można skompilować przy użyciu dowolnego kompilatora C++ wspierającego standard C++11 lub nowszy.
 
-**Kompilacja przez terminal:**
+**Kompilacja (GCC):**
 ```bash
-g++ main.cpp sorting.cpp -o sort_benchmark -O3
+g++ src/Algorytmy_projekt.cpp -o benchmark -O3
