@@ -32,8 +32,7 @@ Dane stanowią średnią ze **100 pomiarów** przeprowadzonych w trybie **Releas
 > **Wniosek:** Wyszukiwanie binarne drastycznie redukuje liczbę porównań, ale ze względu na koszt operacji na pamięci i tę samą liczbę przesunięć, czas całkowity może być zbliżony do wersji klasycznej lub nieco wyższy przez narzut logiki wyszukiwania.
 
 ## 📁 Struktura plików
-* **src/Algorytmy_projekt.cpp**: Główny i jedyny plik źródłowy zawierający implementację algorytmów, generatory danych oraz logikę benchmarku [cite: 2026-03-23].
-* **wyniki.txt**: Plik generowany automatycznie, zawierający szczegółowe dane z pomiarów w formacie CSV.
+* **src/Algorytmy_projekt.cpp**: Główny i jedyny plik źródłowy zawierający implementację algorytmów, generatory danych oraz logikę benchmarku.
 
 ## 🛠 Kompilacja i uruchomienie
 Program można skompilować przy użyciu dowolnego kompilatora C++ wspierającego standard C++11 lub nowszy.
