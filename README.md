@@ -17,7 +17,7 @@ Pomiary zostały przeprowadzone na następującej konfiguracji:
 ## 🚀 Implementowane algorytmy
 1. **Classic Insertion Sort**: Standardowa implementacja z jednoczesnym szukaniem miejsca i przesuwaniem elementów wewnątrz jednej pętli.
 2. **Linear Insertion Sort**: Wariant z rozdzielonym procesem liniowego szukania miejsca wstawienia oraz przesuwania elementów.
-3. **Binary Insertion Sort**: Optymalizacja wykorzystująca wyszukiwanie binarne ($O(\log n)$) do znalezienia odpowiedniego miejsca wstawienia.
+3. **Binary Insertion Sort**: Optymalizacja wykorzystująca wyszukiwanie binarne O(logn) do znalezienia odpowiedniego miejsca wstawienia.
 4. **Linear Mirror Sort**: Wariant algorytmu rozpoczynający proces sortowania od końca tablicy (lustrzane odbicie).
 
 ## 📊 Przykład wyników (dla n = 10 000)
